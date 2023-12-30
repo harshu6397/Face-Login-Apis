@@ -3,8 +3,8 @@ import os
 import pickle
 
 def register_on_submit(email, image):
-    header, encoded = image.split(",", 1)
     try:
+        _, encoded = image.split(",", 1)
         try:
             data = pickle.loads(open("data.pickle", "rb").read())
         except Exception as e:
@@ -19,4 +19,4 @@ def register_on_submit(email, image):
     except Exception as e:
         print(e.__cause__)
         return "Registration failed!"
-    return "Registration Successful!"
+    return "Registration Successful!"   

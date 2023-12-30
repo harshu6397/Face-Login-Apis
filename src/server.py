@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, render_template, request, url_for, redirect, Blueprint, send_from_directory
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, SubmitField
@@ -5,6 +7,13 @@ from wtforms.validators import DataRequired
 import os
 from login import login_check as lc
 from register import register_on_submit as rs
+from pymongo import MongoClient
+
+# create model
+client = MongoClient(os.getenv('MONGO_URI'))
+db = client['users']
+collection = db['users']
+
 
 main = Blueprint('main', __name__)
 
@@ -91,4 +100,4 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='localhost', port=os.getenv('FLASK_RUN_PORT') or 8000, debug=True)

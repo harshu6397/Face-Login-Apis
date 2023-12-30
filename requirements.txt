@@ -5,3 +5,4 @@ opentok==2.10.0
 face-recognition==1.3.0
 Werkzeug==2.0.3
 jinja2==3.0.3
+python-dotenv==1.0.0
